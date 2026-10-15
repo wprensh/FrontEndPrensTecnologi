@@ -1,14 +1,51 @@
 @use '@angular/material' as mat;
 
+// Paleta tomada del brochure de Prens
+:root {
+  --brand-navy: #081530;
+  --brand-navy-2: #0b1a3a;
+  --brand-panel: #0f2147;
+  --brand-panel-line: #1f3263;
+  --brand-yellow: #f5c542;
+  --brand-ochre: #d9a43a;
+  --brand-paper: #f3f6fb;
+  --brand-soft: #b2b9c6;
+  --brand-muted: #7b869a;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
 html {
-  color-scheme: light dark;
+  color-scheme: dark;
   @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
+    color: (primary: mat.$yellow-palette, tertiary: mat.$blue-palette, theme-type: dark),
+    typography: (plain-family: 'Inter', brand-family: 'Inter', bold-weight: 700, medium-weight: 600, regular-weight: 400),
     density: 0,
+  ));
+
+  // Opción 2, Nocturno: todo sobre el navy del brochure, amarillo como color primario
+  @include mat.theme-overrides((
+    primary: #f5c542,
+    on-primary: #081530,
+    primary-container: #2a3555,
+    on-primary-container: #f5c542,
+    secondary-container: #f5c542,
+    on-secondary-container: #081530,
+    tertiary: #8fb3ff,
+    surface: #0b1a3a,
+    on-surface: #f3f6fb,
+    on-surface-variant: #b2b9c6,
+    surface-container: #0f2147,
+    surface-container-high: #12264f,
+    surface-container-highest: #162c5a,
+    outline: #3a4b78,
+    outline-variant: #1f3263,
+    inverse-surface: #f3f6fb,
+    inverse-on-surface: #081530,
+    inverse-primary: #9a6500,
+    error: #ff8a80,
+    corner-medium: 12px,
+    corner-large: 16px,
+    corner-extra-large: 16px,
   ));
 }
 
@@ -16,7 +53,20 @@ html, body { height: 100%; }
 
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
+  font-family: Inter, 'Helvetica Neue', sans-serif;
+  color: var(--brand-paper);
+  background:
+    radial-gradient(1000px 480px at 85% -10%, rgb(245 197 66 / 10%), transparent 60%),
+    radial-gradient(900px 600px at -10% 10%, rgb(56 98 196 / 18%), transparent 60%),
+    var(--brand-navy);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brand-yellow);
 }

@@ -1,10 +1,11 @@
 <section class="dashboard">
   <header class="dashboard-header">
     <div>
-      <h1>Gestión de tareas</h1>
+      <span class="eyebrow">Panel de control</span>
+      <h1>Gestión de tareas<span class="dot"></span></h1>
       <p class="subtitle">{{ store.stats().done }} de {{ store.stats().total }} completadas</p>
     </div>
-    <button mat-flat-button (click)="openCreateDialog()">
+    <button mat-flat-button class="cta" (click)="openCreateDialog()">
       <mat-icon>add</mat-icon>
       Nueva tarea
     </button>

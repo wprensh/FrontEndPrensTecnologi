@@ -1,24 +1,44 @@
+@use '@angular/material' as mat;
+
 :host {
   display: block;
 }
 
 .task-card {
+  position: relative;
   height: 100%;
-  border-left: 4px solid var(--task-accent, var(--mat-sys-outline));
-  transition: transform 150ms ease, box-shadow 150ms ease;
+  overflow: hidden;
+  transition: transform 150ms ease, border-color 150ms ease;
+  @include mat.card-overrides((
+    outlined-container-color: rgb(15 33 71 / 70%),
+    outlined-outline-color: var(--brand-panel-line),
+  ));
+
+  // Franja de prioridad
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--task-accent, var(--brand-panel-line));
+  }
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: var(--mat-sys-level2);
+    border-color: rgb(245 197 66 / 45%);
   }
 
   &.is-done {
-    opacity: 0.7;
+    opacity: 0.6;
 
     mat-card-title {
       text-decoration: line-through;
     }
   }
+}
+
+mat-card-title {
+  font-weight: 600;
 }
 
 .menu-trigger {
@@ -29,20 +49,27 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
 
   &.is-overdue {
     color: var(--mat-sys-error);
-    font-weight: 500;
   }
 }
 
 .description {
   margin: 8px 0 0;
-  color: var(--mat-sys-on-surface-variant);
+  color: var(--brand-soft);
 }
 
 .chips {
   padding: 8px 16px 16px;
+  @include mat.chips-overrides((
+    outline-color: var(--brand-panel-line),
+    container-shape-radius: 999px,
+    label-text-size: 12px,
+    elevated-selected-container-color: rgb(245 197 66 / 18%),
+  ));
 }
 
 .danger {
