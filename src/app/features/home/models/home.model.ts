@@ -1,15 +1,7 @@
-export type TechCategory = 'backend' | 'frontend' | 'cloud' | 'data' | 'ai';
-
 export interface Service {
   icon: string; // nombre de Material Icon
   title: string;
   description: string;
-}
-
-export interface Technology {
-  name: string;
-  category: TechCategory;
-  icon: string; // archivo en public/tech-icons/, sin extensión
 }
 
 export interface ProcessStep {
@@ -33,11 +25,3 @@ export interface ContactInfo {
   phone: string;
   city: string;
 }
-
-export const TECH_CATEGORY_LABELS: Record<TechCategory, string> = {
-  backend: 'Backend',
-  frontend: 'Web y móvil',
-  cloud: 'Nube y DevOps',
-  data: 'Datos y mensajería',
-  ai: 'Inteligencia artificial',
-};

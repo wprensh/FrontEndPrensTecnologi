@@ -3,9 +3,11 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 
+import { HeroBannerComponent } from './shell/hero-banner/hero-banner.component';
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatToolbarModule, MatButtonModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatToolbarModule, MatButtonModule, HeroBannerComponent],
   template: `
     <header class="masthead">
       <mat-toolbar class="toolbar">
@@ -19,11 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
           <a mat-button routerLink="/tareas" routerLinkActive="is-active">Tareas</a>
         </nav>
       </mat-toolbar>
-      <div class="hero">
-        <p class="hero-kicker">Ingeniería de software · Cartagena, CO</p>
-        <p class="hero-text">Desarrollo de software a la medida, integraciones y nube para empresas que quieren crecer.</p>
-        <p class="hero-stack">.NET · Azure · Web · Móvil</p>
-      </div>
+      <app-hero-banner />
     </header>
     <main class="content">
       <router-outlet />
@@ -47,12 +45,7 @@ import { MatButtonModule } from '@angular/material/button';
       @include mat.button-overrides((text-label-text-color: #fff));
     }
     .nav a.is-active { box-shadow: inset 0 -2px 0 var(--brand-yellow); border-radius: 0; }
-    .hero { max-width: 1200px; margin: 0 auto; padding: 24px 16px 72px; box-sizing: border-box; }
-    .hero-kicker { margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #b2b9c6; }
-    .hero-text { max-width: 640px; margin: 12px 0; font-size: 26px; line-height: 1.25; font-weight: 400; color: #fff; }
-    .hero-stack { margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brand-yellow); }
     .content { max-width: 1200px; margin: -48px auto 0; padding: 0 16px 48px; box-sizing: border-box; }
-    @media (max-width: 600px) { .hero-text { font-size: 20px; } }
   `,
 })
 export class AppComponent {}

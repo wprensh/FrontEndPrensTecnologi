@@ -4,8 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 
-import { CONTACT, PROCESS, RESULTS, SERVICES, TECHNOLOGIES } from '../../data-access/home.content';
-import { TECH_CATEGORY_LABELS, TechCategory } from '../../models/home.model';
+import { TECH_CATEGORY_LABELS, TECHNOLOGIES, TechCategory } from '../../../../shared/brand/technologies';
+import { CONTACT, PROCESS, RESULTS, SERVICES } from '../../data-access/home.content';
 import { ServiceCardComponent } from '../../ui/service-card/service-card.component';
 
 @Component({
