@@ -44,7 +44,10 @@
           <h3>{{ group.label }}</h3>
           <mat-chip-set [attr.aria-label]="group.label">
             @for (tech of group.items; track tech.name) {
-              <mat-chip disableRipple>{{ tech.name }}</mat-chip>
+              <mat-chip disableRipple>
+                <img matChipAvatar class="tech-logo" [src]="'tech-icons/' + tech.icon + '.svg'" alt="" />
+                {{ tech.name }}
+              </mat-chip>
             }
           </mat-chip-set>
         </div>

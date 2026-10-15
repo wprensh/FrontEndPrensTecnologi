@@ -15,18 +15,18 @@ export const SERVICES: Service[] = [
 ];
 
 export const TECHNOLOGIES: Technology[] = [
-  { name: 'C# / .NET 8', category: 'backend' },
-  { name: 'Node.js', category: 'backend' },
-  { name: 'Angular', category: 'frontend' },
-  { name: 'React', category: 'frontend' },
-  { name: 'React Native', category: 'frontend' },
-  { name: 'Azure', category: 'cloud' },
-  { name: 'Docker', category: 'cloud' },
-  { name: 'SQL Server', category: 'data' },
-  { name: 'MySQL', category: 'data' },
-  { name: 'Oracle', category: 'data' },
-  { name: 'RabbitMQ', category: 'data' },
-  { name: 'Claude / LLMs', category: 'ai' },
+  { name: 'C# / .NET 8', category: 'backend', icon: 'dotnetcore' },
+  { name: 'Node.js', category: 'backend', icon: 'nodejs' },
+  { name: 'Angular', category: 'frontend', icon: 'angular' },
+  { name: 'React', category: 'frontend', icon: 'react' },
+  { name: 'React Native', category: 'frontend', icon: 'react' },
+  { name: 'Azure', category: 'cloud', icon: 'azure' },
+  { name: 'Docker', category: 'cloud', icon: 'docker' },
+  { name: 'SQL Server', category: 'data', icon: 'microsoftsqlserver' },
+  { name: 'MySQL', category: 'data', icon: 'mysql' },
+  { name: 'Oracle', category: 'data', icon: 'oracle' },
+  { name: 'RabbitMQ', category: 'data', icon: 'rabbitmq' },
+  { name: 'Claude / LLMs', category: 'ai', icon: 'claude' },
 ];
 
 export const PROCESS: ProcessStep[] = [

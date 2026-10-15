@@ -123,7 +123,14 @@ mat-chip-set {
     label-text-font: var(--font-mono),
     label-text-size: 13px,
     label-text-color: var(--brand-navy),
+    container-height: 40px,
+    with-avatar-avatar-shape-radius: 0,
+    with-avatar-avatar-size: 22px,
   ));
+}
+
+.tech-logo {
+  object-fit: contain;
 }
 
 .process {

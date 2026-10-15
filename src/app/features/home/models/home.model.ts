@@ -9,6 +9,7 @@ export interface Service {
 export interface Technology {
   name: string;
   category: TechCategory;
+  icon: string; // archivo en public/tech-icons/, sin extensión
 }
 
 export interface ProcessStep {
