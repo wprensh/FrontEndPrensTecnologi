@@ -65,7 +65,7 @@ export class TasksDashboardComponent implements OnInit {
   // Efecto: el título de la pestaña muestra las tareas abiertas
   private readonly syncTitle = effect(() => {
     const { pending, inProgress } = this.store.stats();
-    this.title.setTitle(`(${pending + inProgress}) Tareas | PrensTecnologi`);
+    this.title.setTitle(`(${pending + inProgress}) Tareas | Prens Tegnologi`);
   });
 
   ngOnInit(): void {

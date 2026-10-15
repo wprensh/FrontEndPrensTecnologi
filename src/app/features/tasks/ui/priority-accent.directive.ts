@@ -2,9 +2,9 @@ import { Directive, computed, input } from '@angular/core';
 import { TaskPriority } from '../models/task.model';
 
 const ACCENTS: Record<TaskPriority, string> = {
-  high: 'var(--mat-sys-error)',
-  medium: 'var(--mat-sys-tertiary)',
-  low: 'var(--mat-sys-outline)',
+  high: 'var(--brand-yellow)',
+  medium: 'var(--brand-navy)',
+  low: 'var(--brand-line)',
 };
 
 @Directive({

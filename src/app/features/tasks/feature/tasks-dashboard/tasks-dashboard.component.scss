@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 :host {
   display: block;
 }
@@ -6,52 +8,75 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid var(--brand-line);
 }
 
 .dashboard-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
 
   h1 {
-    margin: 0;
-    font: var(--mat-sys-headline-medium);
+    margin: 6px 0 0;
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--brand-navy);
   }
 
   .subtitle {
     margin: 4px 0 0;
-    color: var(--mat-sys-on-surface-variant);
+    color: var(--brand-muted);
   }
 }
 
+.cta {
+  height: 44px;
+  font-weight: 600;
+  @include mat.button-overrides((
+    filled-container-color: var(--brand-yellow),
+    filled-label-text-color: var(--brand-navy),
+    filled-container-shape: 2px,
+  ));
+}
+
+// Cifras grandes con regla superior, como "Resultados entregados" del brochure
 .stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  gap: 24px;
 }
 
 .stat {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 12px;
-  align-items: center;
-  padding: 16px;
-}
-
-.stat-icon {
-  grid-row: span 2;
-  color: var(--mat-sys-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 12px;
+  border-top: 3px solid var(--brand-navy);
 }
 
 .stat-value {
-  font: var(--mat-sys-headline-small);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--brand-navy);
 }
 
 .stat-label {
-  font: var(--mat-sys-label-medium);
-  color: var(--mat-sys-on-surface-variant);
+  font-size: 13px;
+  color: var(--brand-ink);
+}
+
+mat-progress-bar {
+  @include mat.progress-bar-overrides((
+    active-indicator-color: var(--brand-yellow),
+    track-color: var(--brand-line),
+  ));
 }
 
 .filters {
@@ -64,6 +89,14 @@
 
 .search {
   flex: 1 1 280px;
+}
+
+.status-toggle {
+  @include mat.button-toggle-overrides((
+    selected-state-background-color: var(--brand-navy),
+    selected-state-text-color: #fff,
+    shape: 2px,
+  ));
 }
 
 .grid {
@@ -80,7 +113,7 @@
   gap: 12px;
   padding: 48px 16px;
   text-align: center;
-  color: var(--mat-sys-on-surface-variant);
+  color: var(--brand-muted);
 }
 
 .state-icon {
@@ -96,12 +129,21 @@
 }
 
 @media (max-width: 600px) {
+  .dashboard {
+    padding: 20px 16px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 28px;
+  }
+
   .dashboard-header button,
   .status-toggle {
     width: 100%;
   }
 
-  .status-toggle {
-    overflow-x: auto;
+  .status-toggle mat-button-toggle {
+    flex: 1;
+    font-size: 12px;
   }
 }
