@@ -1,4 +1,4 @@
-import { CaseStudy, ContactInfo, ProcessStep, Result, Service, Technology } from '../models/home.model';
+import { CaseStudy, ContactInfo, ProcessStep, Result, Service } from '../models/home.model';
 
 // Contenido tomado del brochure de Prens. Si más adelante viene de un CMS o API,
 // solo cambia este archivo por un servicio en data-access/.
@@ -12,22 +12,6 @@ export const SERVICES: Service[] = [
   { icon: 'monitoring', title: 'Telemetría de aplicaciones', description: 'Monitoreo, métricas y trazas para ver en tiempo real cómo se comportan sus sistemas.' },
   { icon: 'auto_awesome', title: 'Optimización con IA y LLMs', description: 'Optimizamos procesos con Claude y modelos de lenguaje integrados a sus sistemas.' },
   { icon: 'support_agent', title: 'Consultoría técnica', description: 'Revisión de código, estándares y mentoría para su equipo de desarrollo.' },
-];
-
-export const TECHNOLOGIES: Technology[] = [
-  { name: 'C# / .NET 8', category: 'backend', icon: 'dotnetcore' },
-  { name: 'Node.js', category: 'backend', icon: 'nodejs' },
-  { name: 'Angular', category: 'frontend', icon: 'angular' },
-  { name: 'React', category: 'frontend', icon: 'react' },
-  { name: 'React Native', category: 'frontend', icon: 'react' },
-  { name: 'Azure', category: 'cloud', icon: 'azure' },
-  { name: 'Docker', category: 'cloud', icon: 'docker' },
-  { name: 'SQL Server', category: 'data', icon: 'microsoftsqlserver' },
-  { name: 'MySQL', category: 'data', icon: 'mysql' },
-  { name: 'Oracle', category: 'data', icon: 'oracle' },
-  { name: 'Redis', category: 'data', icon: 'redis' },
-  { name: 'RabbitMQ', category: 'data', icon: 'rabbitmq' },
-  { name: 'Claude / LLMs', category: 'ai', icon: 'claude' },
 ];
 
 export const PROCESS: ProcessStep[] = [
