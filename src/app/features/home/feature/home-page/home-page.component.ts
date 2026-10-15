@@ -6,11 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { TECH_CATEGORY_LABELS, TECHNOLOGIES, TechCategory } from '../../../../shared/brand/technologies';
 import { CONTACT, PROCESS, RESULTS, SERVICES } from '../../data-access/home.content';
-import { ServiceCardComponent } from '../../ui/service-card/service-card.component';
+import { ServiceListComponent } from '../../ui/service-list/service-list.component';
 
 @Component({
   selector: 'app-home-page',
-  imports: [RouterLink, MatButtonModule, MatChipsModule, MatIconModule, ServiceCardComponent],
+  imports: [RouterLink, MatButtonModule, MatChipsModule, MatIconModule, ServiceListComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
