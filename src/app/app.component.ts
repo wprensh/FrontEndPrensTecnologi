@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
         </a>
         <span class="spacer"></span>
         <nav class="nav">
+          <a mat-button routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
           <a mat-button routerLink="/tareas" routerLinkActive="is-active">Tareas</a>
         </nav>
       </mat-toolbar>

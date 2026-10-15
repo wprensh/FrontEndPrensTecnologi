@@ -1,0 +1,252 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: block;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid var(--brand-line);
+}
+
+h1,
+h2 {
+  margin: 8px 0 0;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--brand-navy);
+}
+
+h1 {
+  font-size: 46px;
+  line-height: 1.08;
+}
+
+h2 {
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--brand-navy);
+}
+
+p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--brand-ink);
+}
+
+.cta {
+  height: 46px;
+  font-weight: 600;
+  @include mat.button-overrides((
+    filled-container-color: var(--brand-yellow),
+    filled-label-text-color: var(--brand-navy),
+    filled-container-shape: 2px,
+  ));
+}
+
+// Presentación en dos columnas: texto y bloque navy de resultados
+.intro {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+.intro-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.lead {
+  max-width: 560px;
+  margin-top: 16px;
+  font-size: 17px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.link {
+  font-weight: 600;
+  @include mat.button-overrides((text-label-text-color: var(--brand-navy)));
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+  background: var(--brand-navy);
+  color: #fff;
+}
+
+.eyebrow--light {
+  color: var(--brand-yellow);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 20px;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgb(255 255 255 / 20%);
+}
+
+.result-value {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--brand-yellow);
+}
+
+.result-label {
+  font-size: 13px;
+  color: #dbe2ee;
+}
+
+.section-head {
+  margin-bottom: 24px;
+}
+
+// Servicios como lista numerada en dos columnas
+.services {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px solid var(--brand-navy);
+}
+
+.service {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 8px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--brand-line);
+}
+
+.service-index {
+  padding-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--brand-ochre);
+}
+
+.cases {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.case {
+  padding: 20px;
+  border: 1px solid var(--brand-line);
+  border-top: 3px solid var(--brand-navy);
+}
+
+.case-sector {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-muted);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 0 -32px -32px;
+  padding: 48px 32px;
+  background: var(--brand-navy);
+
+  h2 {
+    margin: 0;
+    color: #fff;
+  }
+}
+
+.contact-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 16px;
+  color: #dbe2ee;
+
+  a {
+    color: #fff;
+  }
+}
+
+@media (max-width: 1000px) {
+  .intro {
+    grid-template-columns: 1fr;
+  }
+
+  .cases {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .services {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .home {
+    gap: 44px;
+    padding: 24px 16px 16px;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .cases {
+    grid-template-columns: 1fr;
+  }
+
+  .results {
+    padding: 20px;
+  }
+
+  .contact {
+    margin: 0 -16px -16px;
+    padding: 32px 16px;
+  }
+}

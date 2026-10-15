@@ -1,0 +1,81 @@
+<div class="home">
+  <section class="intro">
+    <div class="intro-text">
+      <span class="eyebrow">Quiénes somos</span>
+      <h1>Software que mueve operaciones reales.</h1>
+      <p class="lead">
+        Firma de ingeniería de software de Cartagena de Indias. Digitalizamos procesos, integramos sistemas y
+        construimos plataformas web y móviles sobre .NET y Azure.
+      </p>
+      <div class="actions">
+        <a mat-flat-button class="cta" [href]="mailto">Hablemos de su proyecto</a>
+        <a mat-button class="link" routerLink="/tareas">Ver panel de tareas →</a>
+      </div>
+    </div>
+    <aside class="results" aria-label="Resultados entregados">
+      <span class="eyebrow eyebrow--light">Resultados entregados</span>
+      <div class="results-grid">
+        @for (result of results; track result.label) {
+          <div class="result">
+            <span class="result-value">{{ result.value }}</span>
+            <span class="result-label">{{ result.label }}</span>
+          </div>
+        }
+      </div>
+    </aside>
+  </section>
+
+  <section class="section" id="servicios">
+    <header class="section-head">
+      <span class="eyebrow">Servicios</span>
+      <h2>Lo que hacemos</h2>
+    </header>
+    <ol class="services">
+      @for (service of services; track service.title; let i = $index) {
+        <li class="service">
+          <span class="service-index">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <div>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="section" id="tecnologias">
+    <header class="section-head">
+      <span class="eyebrow">Tecnologías</span>
+      <h2>Con qué lo construimos</h2>
+    </header>
+    <app-tech-explorer [technologies]="technologies" />
+  </section>
+
+  <section class="section" id="experiencia">
+    <header class="section-head">
+      <span class="eyebrow">Experiencia que nos respalda</span>
+      <h2>Proyectos entregados</h2>
+    </header>
+    <div class="cases">
+      @for (item of cases; track item.title) {
+        <article class="case">
+          <span class="case-sector">{{ item.sector }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <h2>Hablemos de su próximo proyecto.</h2>
+    <p class="contact-line">
+      <a [href]="mailto">{{ contact.email }}</a>
+      <span aria-hidden="true">·</span>
+      <span>{{ contact.phone }}</span>
+      <span aria-hidden="true">·</span>
+      <span>{{ contact.city }}</span>
+    </p>
+    <a mat-flat-button class="cta" [href]="mailto">Escríbanos</a>
+  </section>
+</div>
