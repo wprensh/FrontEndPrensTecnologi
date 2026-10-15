@@ -17,6 +17,12 @@ npm run build      # build de producción en dist/
 npm test           # pruebas unitarias (Karma)
 ```
 
+## Despliegue
+
+Cada push a `main` publica la página en GitHub Pages con `.github/workflows/deploy-pages.yml`: https://wprensh.github.io/FrontEndPrensTecnologi/
+
+Requisito único: en **Settings → Pages**, elegir **GitHub Actions** como origen (Source).
+
 ## Estructura
 
 ```text
