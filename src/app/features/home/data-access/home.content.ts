@@ -4,14 +4,14 @@ import { CaseStudy, ContactInfo, ProcessStep, Result, Service } from '../models/
 // solo cambia este archivo por un servicio en data-access/.
 
 export const SERVICES: Service[] = [
-  { icon: 'code', title: 'Desarrollo a la medida', description: 'Aplicaciones web y móviles con .NET, Angular, React y React Native.' },
-  { icon: 'hub', title: 'APIs e integraciones', description: 'Servicios REST y SOAP que conectan sus sistemas internos y de terceros.' },
-  { icon: 'lan', title: 'Microservicios y mensajería', description: 'Arquitecturas desacopladas con RabbitMQ y Azure Service Bus.' },
-  { icon: 'cloud', title: 'Nube y DevOps', description: 'Azure, Docker, Key Vault y pipelines CI/CD en Azure DevOps.' },
-  { icon: 'trending_up', title: 'Migración y escalado', description: 'Llevamos sus aplicaciones a .NET moderno, con escala vertical y horizontal.' },
-  { icon: 'monitoring', title: 'Telemetría de aplicaciones', description: 'Monitoreo, métricas y trazas para ver en tiempo real cómo se comportan sus sistemas.' },
-  { icon: 'auto_awesome', title: 'Optimización con IA y LLMs', description: 'Optimizamos procesos con Claude y modelos de lenguaje integrados a sus sistemas.' },
-  { icon: 'support_agent', title: 'Consultoría técnica', description: 'Revisión de código, estándares y mentoría para su equipo de desarrollo.' },
+  { icon: 'code', title: 'Desarrollo a la medida', description: 'Aplicaciones web y móviles con .NET, Angular, React y React Native.', logos: ['dotnetcore', 'angular', 'react'] },
+  { icon: 'hub', title: 'APIs e integraciones', description: 'Servicios REST y SOAP que conectan sus sistemas internos y de terceros.', logos: ['dotnetcore', 'nodejs'] },
+  { icon: 'lan', title: 'Microservicios y mensajería', description: 'Arquitecturas desacopladas con RabbitMQ y Azure Service Bus.', logos: ['rabbitmq', 'azure', 'docker'] },
+  { icon: 'cloud', title: 'Nube y DevOps', description: 'Azure, Docker, Key Vault y pipelines CI/CD en Azure DevOps.', logos: ['azure', 'azuredevops', 'docker'] },
+  { icon: 'trending_up', title: 'Migración y escalado', description: 'Llevamos sus aplicaciones a .NET moderno, con escala vertical y horizontal.', logos: ['dotnetcore', 'azure'] },
+  { icon: 'monitoring', title: 'Telemetría de aplicaciones', description: 'Monitoreo, métricas y trazas para ver en tiempo real cómo se comportan sus sistemas.', logos: ['azure'] },
+  { icon: 'auto_awesome', title: 'Optimización con IA y LLMs', description: 'Optimizamos procesos con Claude y modelos de lenguaje integrados a sus sistemas.', logos: ['claude'] },
+  { icon: 'support_agent', title: 'Consultoría técnica', description: 'Revisión de código, estándares y mentoría para su equipo de desarrollo.', logos: ['dotnetcore', 'angular', 'azuredevops'] },
 ];
 
 export const PROCESS: ProcessStep[] = [
