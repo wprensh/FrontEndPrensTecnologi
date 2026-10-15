@@ -25,6 +25,7 @@ export const TECHNOLOGIES: Technology[] = [
   { name: 'SQL Server', category: 'data', icon: 'microsoftsqlserver' },
   { name: 'MySQL', category: 'data', icon: 'mysql' },
   { name: 'Oracle', category: 'data', icon: 'oracle' },
+  { name: 'Redis', category: 'data', icon: 'redis' },
   { name: 'RabbitMQ', category: 'data', icon: 'rabbitmq' },
   { name: 'Claude / LLMs', category: 'ai', icon: 'claude' },
 ];
