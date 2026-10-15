@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 :host {
   display: block;
 }
@@ -5,53 +7,86 @@
 .dashboard {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 
 .dashboard-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
 
   h1 {
-    margin: 0;
-    font: var(--mat-sys-headline-medium);
+    margin: 10px 0 0;
+    font-size: 52px;
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: var(--brand-navy);
   }
 
   .subtitle {
-    margin: 4px 0 0;
-    color: var(--mat-sys-on-surface-variant);
+    margin: 10px 0 0;
+    color: var(--brand-ink);
   }
 }
 
+.cta {
+  height: 48px;
+  padding: 0 24px;
+  font-weight: 600;
+  @include mat.button-overrides((
+    filled-container-color: var(--brand-navy),
+    filled-label-text-color: #fff,
+  ));
+}
+
+// Fila de cifras con índices monoespaciados, como el "Cómo trabajamos" del brochure
 .stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  border-top: 2px solid var(--brand-navy);
 }
 
 .stat {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 12px;
-  align-items: center;
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 20px 4px 0;
+
+  &:not(:first-child) {
+    padding-left: 20px;
+    border-left: 1px solid var(--brand-line);
+  }
 }
 
-.stat-icon {
-  grid-row: span 2;
-  color: var(--mat-sys-primary);
+.stat-index {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--brand-ochre);
 }
 
 .stat-value {
-  font: var(--mat-sys-headline-small);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--brand-navy);
 }
 
 .stat-label {
-  font: var(--mat-sys-label-medium);
-  color: var(--mat-sys-on-surface-variant);
+  font-size: 13px;
+  color: var(--brand-ink);
+}
+
+mat-progress-bar {
+  @include mat.progress-bar-overrides((
+    active-indicator-color: var(--brand-yellow),
+    track-color: var(--brand-line),
+    active-indicator-height: 2px,
+    track-height: 2px,
+  ));
 }
 
 .filters {
@@ -66,10 +101,33 @@
   flex: 1 1 280px;
 }
 
+// Filtros como pestañas de texto con subrayado amarillo
+.status-toggle {
+  border: 0;
+  gap: 4px;
+  @include mat.button-toggle-overrides((
+    divider-color: transparent,
+    selected-state-background-color: transparent,
+    selected-state-text-color: var(--brand-navy),
+    text-color: var(--brand-muted),
+    label-text-font: 'JetBrains Mono',
+    label-text-size: 12px,
+    label-text-tracking: 0.08em,
+  ));
+
+  mat-button-toggle {
+    text-transform: uppercase;
+  }
+
+  .mat-button-toggle-checked {
+    box-shadow: inset 0 -2px 0 var(--brand-yellow);
+  }
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px 32px;
 }
 
 .state {
@@ -80,7 +138,7 @@
   gap: 12px;
   padding: 48px 16px;
   text-align: center;
-  color: var(--mat-sys-on-surface-variant);
+  color: var(--brand-muted);
 }
 
 .state-icon {
@@ -89,19 +147,28 @@
   font-size: 48px;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
   .stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
   }
 }
 
 @media (max-width: 600px) {
+  .dashboard-header h1 {
+    font-size: 36px;
+  }
+
   .dashboard-header button,
   .status-toggle {
     width: 100%;
   }
 
-  .status-toggle {
-    overflow-x: auto;
+  .status-toggle mat-button-toggle {
+    flex: 1;
   }
 }

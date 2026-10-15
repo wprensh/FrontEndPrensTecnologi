@@ -1,14 +1,47 @@
 @use '@angular/material' as mat;
 
+// Paleta tomada del brochure de Prens
+:root {
+  --brand-navy: #081530;
+  --brand-navy-2: #0b1a3a;
+  --brand-yellow: #f5c542;
+  --brand-ochre: #9a6500;
+  --brand-paper: #f3f6fb;
+  --brand-line: #dbe2ee;
+  --brand-ink: #3b4a66;
+  --brand-muted: #7b869a;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
 html {
-  color-scheme: light dark;
+  color-scheme: light;
   @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
+    color: (primary: mat.$blue-palette, tertiary: mat.$orange-palette),
+    typography: (plain-family: 'Inter', brand-family: 'Inter', bold-weight: 700, medium-weight: 600, regular-weight: 400),
+    density: -1,
+  ));
+
+  // Opción 3, Editorial: papel azulado, esquinas rectas y reglas navy como en las secciones del brochure
+  @include mat.theme-overrides((
+    primary: #081530,
+    on-primary: #ffffff,
+    primary-container: #dbe2ee,
+    on-primary-container: #081530,
+    secondary-container: #081530,
+    on-secondary-container: #ffffff,
+    tertiary: #9a6500,
+    surface: #ffffff,
+    on-surface: #0b1a3a,
+    on-surface-variant: #3b4a66,
+    outline: #b2b9c6,
+    outline-variant: #dbe2ee,
+    surface-container-high: #ffffff,
+    corner-extra-small: 0,
+    corner-small: 0,
+    corner-medium: 0,
+    corner-large: 0,
+    corner-extra-large: 0,
+    corner-full: 0,
   ));
 }
 
@@ -16,7 +49,16 @@ html, body { height: 100%; }
 
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
+  font-family: Inter, 'Helvetica Neue', sans-serif;
+  background: var(--brand-paper);
+  color: var(--brand-navy-2);
+  -webkit-font-smoothing: antialiased;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brand-ochre);
 }

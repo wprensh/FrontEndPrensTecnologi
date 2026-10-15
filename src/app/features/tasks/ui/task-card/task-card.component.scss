@@ -1,19 +1,22 @@
+@use '@angular/material' as mat;
+
 :host {
   display: block;
 }
 
+// Tarjeta como bloque editorial: regla superior y sin borde lateral
 .task-card {
   height: 100%;
-  border-left: 4px solid var(--task-accent, var(--mat-sys-outline));
-  transition: transform 150ms ease, box-shadow 150ms ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--mat-sys-level2);
-  }
+  padding-top: 4px;
+  border-top: 2px solid var(--task-accent, var(--brand-navy));
+  @include mat.card-overrides((
+    outlined-container-color: transparent,
+    outlined-outline-color: transparent,
+    outlined-container-shape: 0,
+  ));
 
   &.is-done {
-    opacity: 0.7;
+    opacity: 0.55;
 
     mat-card-title {
       text-decoration: line-through;
@@ -21,36 +24,63 @@
   }
 }
 
+mat-card-header {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+mat-card-content {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+mat-card-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--brand-navy);
+}
+
 .menu-trigger {
   margin-left: auto;
+  margin-right: -8px;
 }
 
 .due {
   display: flex;
   align-items: center;
   gap: 4px;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brand-ochre);
 
   &.is-overdue {
     color: var(--mat-sys-error);
-    font-weight: 500;
   }
 }
 
 .description {
-  margin: 8px 0 0;
-  color: var(--mat-sys-on-surface-variant);
+  margin: 4px 0 0;
+  line-height: 1.5;
+  color: var(--brand-ink);
 }
 
 .chips {
-  padding: 8px 16px 16px;
+  padding: 8px 0 16px;
+  @include mat.chips-overrides((
+    outline-color: var(--brand-line),
+    container-shape-radius: 0,
+    label-text-font: 'JetBrains Mono',
+    label-text-size: 11px,
+    elevated-selected-container-color: var(--brand-yellow),
+    selected-label-text-color: var(--brand-navy),
+    with-icon-selected-icon-color: var(--brand-navy),
+  ));
 }
 
 .danger {
   color: var(--mat-sys-error);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .task-card {
-    transition: none;
-  }
 }

@@ -1,22 +1,23 @@
 <section class="dashboard">
   <header class="dashboard-header">
     <div>
-      <h1>Gestión de tareas</h1>
+      <span class="eyebrow">Cómo vamos</span>
+      <h1>Gestión de tareas.</h1>
       <p class="subtitle">{{ store.stats().done }} de {{ store.stats().total }} completadas</p>
     </div>
-    <button mat-flat-button (click)="openCreateDialog()">
+    <button mat-flat-button class="cta" (click)="openCreateDialog()">
       <mat-icon>add</mat-icon>
       Nueva tarea
     </button>
   </header>
 
   <div class="stats">
-    @for (stat of statCards(); track stat.label) {
-      <mat-card class="stat" appearance="outlined">
-        <mat-icon class="stat-icon" aria-hidden="true">{{ stat.icon }}</mat-icon>
+    @for (stat of statCards(); track stat.label; let i = $index) {
+      <div class="stat">
+        <span class="stat-index">0{{ i + 1 }}</span>
         <span class="stat-value">{{ stat.value }}</span>
         <span class="stat-label">{{ stat.label }}</span>
-      </mat-card>
+      </div>
     }
   </div>
 
