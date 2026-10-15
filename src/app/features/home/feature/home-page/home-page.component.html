@@ -26,11 +26,7 @@
       <span class="eyebrow">Servicios</span>
       <h2>Lo que hacemos</h2>
     </header>
-    <div class="services">
-      @for (service of services; track service.title) {
-        <app-service-card [service]="service" />
-      }
-    </div>
+    <app-service-list [services]="services" />
   </section>
 
   <section class="section" id="tecnologias">
