@@ -1,0 +1,44 @@
+<mat-card
+  class="task-card"
+  appearance="outlined"
+  [appPriorityAccent]="task().priority"
+  [class.is-done]="task().status === 'done'"
+>
+  <mat-card-header>
+    <mat-card-title>{{ task().title }}</mat-card-title>
+    <mat-card-subtitle class="due" [class.is-overdue]="isOverdue()">
+      <mat-icon inline aria-hidden="true">schedule</mat-icon>
+      {{ task().dueDate | taskDueLabel: task().status }}
+    </mat-card-subtitle>
+    <button mat-icon-button class="menu-trigger" [matMenuTriggerFor]="menu" aria-label="Acciones de la tarea">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-content>
+    @if (task().description) {
+      <p class="description">{{ task().description }}</p>
+    }
+  </mat-card-content>
+
+  <mat-chip-set class="chips" aria-label="Prioridad y estado">
+    <mat-chip disableRipple>Prioridad {{ priorityLabels[task().priority] }}</mat-chip>
+    <mat-chip disableRipple [highlighted]="task().status === 'done'">
+      <mat-icon matChipAvatar>{{ statusIcons[task().status] }}</mat-icon>
+      {{ statusLabels[task().status] }}
+    </mat-chip>
+  </mat-chip-set>
+</mat-card>
+
+<mat-menu #menu="matMenu" xPosition="before">
+  @for (status of statusOptions; track status) {
+    <button mat-menu-item [disabled]="status === task().status" (click)="statusChange.emit(status)">
+      <mat-icon>{{ statusIcons[status] }}</mat-icon>
+      <span>Mover a «{{ statusLabels[status] }}»</span>
+    </button>
+  }
+  <button mat-menu-item class="danger" (click)="removeTask.emit()">
+    <mat-icon>delete</mat-icon>
+    <span>Eliminar</span>
+  </button>
+</mat-menu>

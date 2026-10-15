@@ -1,0 +1,56 @@
+:host {
+  display: block;
+}
+
+.task-card {
+  height: 100%;
+  border-left: 4px solid var(--task-accent, var(--mat-sys-outline));
+  transition: transform 150ms ease, box-shadow 150ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mat-sys-level2);
+  }
+
+  &.is-done {
+    opacity: 0.7;
+
+    mat-card-title {
+      text-decoration: line-through;
+    }
+  }
+}
+
+.menu-trigger {
+  margin-left: auto;
+}
+
+.due {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  &.is-overdue {
+    color: var(--mat-sys-error);
+    font-weight: 500;
+  }
+}
+
+.description {
+  margin: 8px 0 0;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.chips {
+  padding: 8px 16px 16px;
+}
+
+.danger {
+  color: var(--mat-sys-error);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .task-card {
+    transition: none;
+  }
+}
