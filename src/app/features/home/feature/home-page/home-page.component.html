@@ -1,0 +1,91 @@
+<div class="home">
+  <section class="section intro">
+    <span class="eyebrow">Quiénes somos</span>
+    <h1>Software que mueve operaciones reales.</h1>
+    <p class="lead">
+      Somos una firma de ingeniería de software de Cartagena de Indias. Digitalizamos procesos, integramos sistemas y
+      construimos plataformas web y móviles sobre .NET y Azure, con arquitecturas preparadas para escalar.
+    </p>
+    <div class="actions">
+      <a mat-flat-button class="cta" [href]="mailto">Hablemos de su proyecto</a>
+      <a mat-stroked-button routerLink="/tareas">Ver panel de tareas</a>
+    </div>
+  </section>
+
+  <section class="results" aria-label="Resultados entregados">
+    @for (result of results; track result.label) {
+      <div class="result">
+        <span class="result-value">{{ result.value }}</span>
+        <span class="result-label">{{ result.label }}</span>
+      </div>
+    }
+  </section>
+
+  <section class="section" id="servicios">
+    <header class="section-head">
+      <span class="eyebrow">Servicios</span>
+      <h2>Lo que hacemos</h2>
+    </header>
+    <div class="services">
+      @for (service of services; track service.title) {
+        <app-service-card [service]="service" />
+      }
+    </div>
+  </section>
+
+  <section class="section" id="tecnologias">
+    <header class="section-head">
+      <span class="eyebrow">Tecnologías</span>
+      <h2>Con qué lo construimos</h2>
+    </header>
+    <div class="tech-groups">
+      @for (group of techGroups; track group.category) {
+        <div class="tech-group">
+          <h3>{{ group.label }}</h3>
+          <mat-chip-set [attr.aria-label]="group.label">
+            @for (tech of group.items; track tech.name) {
+              <mat-chip disableRipple>{{ tech.name }}</mat-chip>
+            }
+          </mat-chip-set>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="section" id="proceso">
+    <header class="section-head">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>Un proceso claro, de la idea a producción.</h2>
+    </header>
+    <ol class="process">
+      @for (step of process; track step.title; let i = $index) {
+        <li class="step">
+          <span class="step-index">0{{ i + 1 }}</span>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.description }}</p>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div>
+      <span class="eyebrow eyebrow--light">Contacto</span>
+      <h2>Hablemos de su próximo proyecto.</h2>
+    </div>
+    <dl class="contact-list">
+      <div>
+        <dt>Correo</dt>
+        <dd><a [href]="mailto">{{ contact.email }}</a></dd>
+      </div>
+      <div>
+        <dt>Teléfono</dt>
+        <dd>{{ contact.phone }}</dd>
+      </div>
+      <div>
+        <dt>Sede</dt>
+        <dd>{{ contact.city }}</dd>
+      </div>
+    </dl>
+  </section>
+</div>

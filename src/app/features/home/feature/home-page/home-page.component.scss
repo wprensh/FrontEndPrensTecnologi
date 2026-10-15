@@ -1,0 +1,250 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: block;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  padding: 40px 32px 32px;
+  background: #fff;
+  border: 1px solid var(--brand-line);
+}
+
+h1,
+h2 {
+  margin: 8px 0 0;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--brand-navy);
+}
+
+h1 {
+  max-width: 720px;
+  font-size: 44px;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.lead {
+  max-width: 680px;
+  margin: 16px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--brand-ink);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cta {
+  height: 46px;
+  font-weight: 600;
+  @include mat.button-overrides((
+    filled-container-color: var(--brand-yellow),
+    filled-label-text-color: var(--brand-navy),
+    filled-container-shape: 2px,
+  ));
+}
+
+.actions a[mat-stroked-button] {
+  height: 46px;
+  @include mat.button-overrides((outlined-container-shape: 2px));
+}
+
+// Cifras del brochure con regla superior
+.results {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 3px solid var(--brand-navy);
+}
+
+.result-value {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--brand-navy);
+}
+
+.result-label {
+  font-size: 13px;
+  color: var(--brand-ink);
+}
+
+.section-head {
+  margin-bottom: 24px;
+}
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.tech-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 24px;
+}
+
+.tech-group h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-muted);
+}
+
+mat-chip-set {
+  @include mat.chips-overrides((
+    outline-color: var(--brand-line),
+    container-shape-radius: 2px,
+    label-text-font: var(--font-mono),
+    label-text-size: 13px,
+    label-text-color: var(--brand-navy),
+  ));
+}
+
+.process {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  padding-top: 12px;
+  border-top: 1px solid var(--brand-line);
+
+  h3 {
+    margin: 8px 0 6px;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--brand-navy);
+  }
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--brand-ink);
+  }
+}
+
+.step-index {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--brand-ochre);
+}
+
+// Bloque de contacto navy, como en el brochure
+.contact {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: end;
+  margin: 0 -32px -32px;
+  padding: 40px 32px;
+  background: var(--brand-navy);
+  color: #fff;
+
+  h2 {
+    color: #fff;
+  }
+}
+
+.eyebrow--light {
+  color: var(--brand-yellow);
+}
+
+.contact-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+
+  dt {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #b2b9c6;
+  }
+
+  dd {
+    margin: 2px 0 0;
+    font-size: 17px;
+  }
+
+  a {
+    color: #fff;
+  }
+}
+
+@media (max-width: 1000px) {
+  .services,
+  .process {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .results {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .home {
+    gap: 40px;
+    padding: 24px 16px 16px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .services,
+  .process {
+    grid-template-columns: 1fr;
+  }
+
+  .contact {
+    margin: 0 -16px -16px;
+    padding: 32px 16px;
+  }
+
+  .actions a {
+    flex: 1 1 100%;
+  }
+}
