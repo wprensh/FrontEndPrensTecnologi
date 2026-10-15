@@ -8,6 +8,11 @@ export const routes: Routes = [
     loadChildren: () => import('./features/home/home.routes').then((m) => m.HOME_ROUTES),
   },
   {
+    path: 'servicios',
+    title: 'Servicios · Prens Tegnologi',
+    loadChildren: () => import('./features/services/services.routes').then((m) => m.SERVICES_ROUTES),
+  },
+  {
     path: 'tareas',
     title: 'Tareas',
     loadChildren: () => import('./features/tasks/tasks.routes').then((m) => m.TASKS_ROUTES),
