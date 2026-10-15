@@ -63,5 +63,10 @@ import { TECHNOLOGIES } from '../../shared/brand/technologies';
   `,
 })
 export class HeroBannerComponent {
-  protected readonly technologies = TECHNOLOGIES;
+  // En la cinta, .NET 8 va en la segunda posición (la de Node.js) para que se vea completo al cargar
+  protected readonly technologies = swapFirstTwo(TECHNOLOGIES);
+}
+
+function swapFirstTwo<T>([first, second, ...rest]: T[]): T[] {
+  return [second, first, ...rest];
 }
