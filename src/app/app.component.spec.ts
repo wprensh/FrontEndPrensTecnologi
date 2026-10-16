@@ -19,6 +19,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.brand')?.getAttribute('aria-label')).toBe('Prens Tegnologi');
+    expect(compiled.querySelector('.brand')?.getAttribute('aria-label')).toBe('Prens Tecnologi');
   });
 });

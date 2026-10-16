@@ -20,7 +20,7 @@ export class HomePageComponent {
   protected readonly process = PROCESS;
   protected readonly results = RESULTS;
   protected readonly contact = CONTACT;
-  protected readonly mailto = `mailto:${CONTACT.email}?subject=${encodeURIComponent('Proyecto con Prens Tegnologi')}`;
+  protected readonly mailto = `mailto:${CONTACT.email}?subject=${encodeURIComponent('Proyecto con Prens Tecnologi')}`;
 
   // Tecnologías agrupadas por categoría, en el orden de TECH_CATEGORY_LABELS
   protected readonly techGroups = (Object.keys(TECH_CATEGORY_LABELS) as TechCategory[]).map((category) => ({

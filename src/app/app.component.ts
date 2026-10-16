@@ -11,11 +11,11 @@ import { HeroBannerComponent } from './shell/hero-banner/hero-banner.component';
   template: `
     <header class="masthead">
       <mat-toolbar class="toolbar">
-        <a class="brand" routerLink="/" aria-label="Prens Tegnologi">
+        <a class="brand" routerLink="/" aria-label="Prens Tecnologi">
           <img class="brand-mark" src="brand/logo-2-simbolo-negativo.svg" alt="" width="40" height="40" />
           <span class="brand-text">
             <span class="brand-word">Prens</span>
-            <span class="brand-sub">Tegnologi</span>
+            <span class="brand-sub">Tecnologi</span>
           </span>
         </a>
         <span class="spacer"></span>
