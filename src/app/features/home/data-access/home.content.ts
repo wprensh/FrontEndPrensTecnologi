@@ -1,4 +1,4 @@
-import { CaseStudy, ContactInfo, ProcessStep, Result, Service } from '../models/home.model';
+import { CaseStudy, ProcessStep, Result, Service } from '../models/home.model';
 
 // Contenido tomado del brochure de Prens. Si más adelante viene de un CMS o API,
 // solo cambia este archivo por un servicio en data-access/.
@@ -35,8 +35,3 @@ export const CASES: CaseStudy[] = [
   { sector: 'Software empresarial', title: 'Modernización de aplicaciones', description: '8+ aplicaciones construidas y migradas a .NET Core.' },
 ];
 
-export const CONTACT: ContactInfo = {
-  email: 'wprensh@hotmail.com',
-  phone: '312 612 3419',
-  city: 'Cartagena de Indias, Colombia',
-};

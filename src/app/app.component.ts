@@ -22,6 +22,7 @@ import { HeroBannerComponent } from './shell/hero-banner/hero-banner.component';
         <nav class="nav">
           <a mat-button routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
           <a mat-button routerLink="/servicios" routerLinkActive="is-active">Servicios</a>
+          <a mat-button routerLink="/contacto" routerLinkActive="is-active">Contacto</a>
           <a mat-button routerLink="/tareas" routerLinkActive="is-active">Tareas</a>
         </nav>
       </mat-toolbar>

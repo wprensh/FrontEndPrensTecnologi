@@ -5,7 +5,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 
 import { TECH_CATEGORY_LABELS, TECHNOLOGIES, TechCategory } from '../../../../shared/brand/technologies';
-import { CONTACT, PROCESS, RESULTS, SERVICES } from '../../data-access/home.content';
+import { CONTACT } from '../../../../shared/brand/contact';
+import { PROCESS, RESULTS, SERVICES } from '../../data-access/home.content';
 import { ServiceListComponent } from '../../ui/service-list/service-list.component';
 
 @Component({

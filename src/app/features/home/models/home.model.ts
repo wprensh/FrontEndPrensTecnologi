@@ -20,9 +20,3 @@ export interface CaseStudy {
   title: string;
   description: string;
 }
-
-export interface ContactInfo {
-  email: string;
-  phone: string;
-  city: string;
-}
