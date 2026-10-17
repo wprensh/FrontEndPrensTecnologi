@@ -1,11 +1,14 @@
 import { inject } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 
+// Exige dominio con extensión (ana@correo.com), cosa que Validators.email no pide.
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 // Formulario de contacto con sus reglas; cada diseño lo crea con contactForm() dentro de su contexto de inyección.
 export function contactForm() {
   return inject(NonNullableFormBuilder).group({
     name: ['', [Validators.required, Validators.maxLength(100)]],
-    email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
+    email: ['', [Validators.required, Validators.email, Validators.pattern(EMAIL), Validators.maxLength(254)]],
     company: ['', Validators.maxLength(100)],
     phone: ['', Validators.pattern(/^[+\d][\d\s-]{6,19}$/)],
     interest: ['', Validators.required],
@@ -27,5 +30,8 @@ const MESSAGES: Record<string, string> = {
 export function fieldError(form: ContactForm, field: keyof ContactForm['controls']): string {
   const errors = form.controls[field].errors;
   const key = errors ? Object.keys(errors)[0] : '';
+  if (key === 'pattern') {
+    return field === 'email' ? MESSAGES['email'] : MESSAGES['pattern'];
+  }
   return MESSAGES[key] ?? '';
 }

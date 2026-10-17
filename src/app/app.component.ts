@@ -57,7 +57,10 @@ import { HeroBannerComponent } from './shell/hero-banner/hero-banner.component';
       .brand-mark { width: 32px; height: 32px; }
       .brand-word { font-size: 18px; }
       .brand-sub { font-size: 11px; }
-      .nav a { min-width: 0; padding: 0 8px; font-size: 11px; letter-spacing: 0.04em; }
+      .nav a { min-width: 0; padding: 0 6px; font-size: 11px; letter-spacing: 0.04em; }
+    }
+    @media (max-width: 400px) {
+      .brand-text { display: none; }
     }
     .content { max-width: 1200px; margin: -48px auto 0; padding: 0 16px 48px; box-sizing: border-box; }
   `,
