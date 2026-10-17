@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,7 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { CONTACT } from '../../../../shared/brand/contact';
 import { contactForm, fieldError } from '../../data-access/contact-form';
-import { ContactService } from '../../data-access/contact.service';
+import { ContactDelivery, ContactService, sendErrorMessage } from '../../data-access/contact.service';
 import { CONTACT_INTERESTS } from '../../models/contact.model';
 
 // Opción 1, Dividido: datos de contacto en un panel azul a la izquierda y el formulario a la derecha
@@ -30,11 +31,16 @@ import { CONTACT_INTERESTS } from '../../models/contact.model';
       </aside>
 
       <section class="form-side">
-        @if (sent()) {
+        @if (delivery(); as delivery) {
           <div class="sent" role="status">
             <mat-icon aria-hidden="true">check_circle</mat-icon>
-            <h2>Su mensaje está listo.</h2>
-            <p>Abrimos su aplicación de correo con todo diligenciado; solo falta pulsar Enviar. Si no se abrió, escríbanos a {{ contact.email }}.</p>
+            @if (delivery === 'api') {
+              <h2>¡Mensaje enviado!</h2>
+              <p>Gracias por escribirnos. Le responderemos a su correo en menos de un día hábil.</p>
+            } @else {
+              <h2>Su mensaje está listo.</h2>
+              <p>Abrimos su aplicación de correo con todo diligenciado; solo falta pulsar Enviar. Si no se abrió, escríbanos a {{ contact.email }}.</p>
+            }
             <button mat-stroked-button type="button" (click)="reset()">Escribir otro mensaje</button>
           </div>
         } @else {
@@ -74,8 +80,13 @@ import { CONTACT_INTERESTS } from '../../models/contact.model';
               <mat-hint align="end">{{ form.controls.message.value.length }} / 1500</mat-hint>
               <mat-error>{{ error('message') }}</mat-error>
             </mat-form-field>
+            @if (sendError(); as message) {
+              <p class="full send-error" role="alert">{{ message }}</p>
+            }
             <div class="full actions">
-              <button mat-flat-button class="cta" type="submit">Enviar mensaje</button>
+              <button mat-flat-button class="cta" type="submit" [disabled]="sending()">
+                {{ sending() ? 'Enviando…' : 'Enviar mensaje' }}
+              </button>
             </div>
           </form>
         }
@@ -104,6 +115,7 @@ import { CONTACT_INTERESTS } from '../../models/contact.model';
     form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 16px; }
     .full { grid-column: 1 / -1; }
     .actions { display: flex; justify-content: flex-end; margin-top: 8px; }
+    .send-error { margin: 4px 0 0; padding: 12px 16px; border-left: 3px solid var(--mat-sys-error); background: var(--brand-paper); font-size: 14px; color: var(--mat-sys-error); }
     .cta {
       height: 48px; padding: 0 28px; font-weight: 600;
       @include mat.button-overrides((filled-container-color: var(--brand-yellow), filled-label-text-color: var(--brand-navy), filled-container-shape: 2px));
@@ -128,11 +140,14 @@ import { CONTACT_INTERESTS } from '../../models/contact.model';
 })
 export class ContactPageComponent {
   private readonly contactService = inject(ContactService);
+  private readonly destroyRef = inject(DestroyRef);
 
   protected readonly contact = CONTACT;
   protected readonly interests = CONTACT_INTERESTS;
   protected readonly form = contactForm();
-  protected readonly sent = signal(false);
+  protected readonly sending = signal(false);
+  protected readonly sendError = signal<string | null>(null);
+  protected readonly delivery = signal<ContactDelivery | null>(null);
 
   protected error(field: keyof typeof this.form.controls): string {
     return fieldError(this.form, field);
@@ -143,12 +158,28 @@ export class ContactPageComponent {
       this.form.markAllAsTouched();
       return;
     }
-    this.contactService.send(this.form.getRawValue());
-    this.sent.set(true);
+    if (this.sending()) return;
+
+    this.sending.set(true);
+    this.sendError.set(null);
+    this.contactService
+      .send(this.form.getRawValue())
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (delivery) => {
+          this.sending.set(false);
+          this.delivery.set(delivery);
+        },
+        error: (error: unknown) => {
+          this.sending.set(false);
+          this.sendError.set(sendErrorMessage(error));
+        },
+      });
   }
 
   protected reset(): void {
     this.form.reset();
-    this.sent.set(false);
+    this.sendError.set(null);
+    this.delivery.set(null);
   }
 }

@@ -15,8 +15,14 @@ export interface Result {
   label: string;
 }
 
+export interface Skill {
+  name: string;
+  icon?: string; // logo de public/tech-icons/, si la habilidad es una tecnología
+}
+
 export interface CaseStudy {
   sector: string;
   title: string;
   description: string;
+  skills: Skill[]; // habilidades que demostró ese proyecto
 }

@@ -6,12 +6,13 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { TECH_CATEGORY_LABELS, TECHNOLOGIES, TechCategory } from '../../../../shared/brand/technologies';
 import { CONTACT } from '../../../../shared/brand/contact';
-import { PROCESS, RESULTS, SERVICES } from '../../data-access/home.content';
+import { CASES, PROCESS, RESULTS, SERVICES } from '../../data-access/home.content';
+import { ExperienceListComponent } from '../../ui/experience-list/experience-list.component';
 import { ServiceListComponent } from '../../ui/service-list/service-list.component';
 
 @Component({
   selector: 'app-home-page',
-  imports: [RouterLink, MatButtonModule, MatChipsModule, MatIconModule, ServiceListComponent],
+  imports: [RouterLink, MatButtonModule, MatChipsModule, MatIconModule, ServiceListComponent, ExperienceListComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,6 +21,7 @@ export class HomePageComponent {
   protected readonly services = SERVICES;
   protected readonly process = PROCESS;
   protected readonly results = RESULTS;
+  protected readonly cases = CASES;
   protected readonly contact = CONTACT;
   protected readonly mailto = `mailto:${CONTACT.email}?subject=${encodeURIComponent('Proyecto con Prens Tecnologi')}`;
 

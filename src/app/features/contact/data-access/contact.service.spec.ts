@@ -1,15 +1,22 @@
-import { buildMailto } from './contact.service';
+import { DOCUMENT } from '@angular/common';
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+
+import { API_URL } from '../../../core/http/api-url';
+import { ContactRequest } from '../models/contact.model';
+import { ContactService, buildMailto, toApiRequest } from './contact.service';
+
+const request: ContactRequest = {
+  name: 'Ana Gómez',
+  email: 'ana@correo.com',
+  company: '',
+  phone: '300 123 4567',
+  interest: 'Nube y DevOps',
+  message: 'Queremos llevar nuestra aplicación a Azure con CI/CD.',
+};
 
 describe('buildMailto', () => {
-  const request = {
-    name: 'Ana Gómez',
-    email: 'ana@correo.com',
-    company: '',
-    phone: '300 123 4567',
-    interest: 'Nube y DevOps',
-    message: 'Queremos llevar nuestra aplicación a Azure con CI/CD.',
-  };
-
   it('dirige el correo a Prens con asunto y cuerpo codificados', () => {
     const url = buildMailto(request, 'hola@prens.co');
     const [address, query] = url.split('?');
@@ -25,5 +32,58 @@ describe('buildMailto', () => {
     const body = new URLSearchParams(buildMailto(request).split('?')[1]).get('body');
 
     expect(body).not.toContain('Empresa:');
+  });
+});
+
+describe('toApiRequest', () => {
+  it('usa los nombres del backend y envía null en los opcionales vacíos', () => {
+    expect(toApiRequest({ ...request, name: '  Ana Gómez ' })).toEqual({
+      nombre: 'Ana Gómez',
+      correo: 'ana@correo.com',
+      empresa: null,
+      telefono: '300 123 4567',
+      interes: 'Nube y DevOps',
+      mensaje: 'Queremos llevar nuestra aplicación a Azure con CI/CD.',
+    });
+  });
+});
+
+describe('ContactService', () => {
+  function setup(apiUrl: string) {
+    const location = { href: '' };
+    TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: API_URL, useValue: apiUrl },
+        { provide: DOCUMENT, useValue: { location } },
+      ],
+    });
+    return { service: TestBed.inject(ContactService), http: TestBed.inject(HttpTestingController), location };
+  }
+
+  it('publica el mensaje en el API cuando está configurado', () => {
+    const { service, http } = setup('http://api.test');
+    let delivery = '';
+
+    service.send(request).subscribe((result) => (delivery = result));
+    const req = http.expectOne('http://api.test/api/contacto');
+    req.flush({ fechaEnvio: '2026-10-17T00:00:00Z' }, { status: 202, statusText: 'Accepted' });
+
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body.correo).toBe('ana@correo.com');
+    expect(delivery).toBe('api');
+    http.verify();
+  });
+
+  it('abre el correo del visitante cuando no hay API', () => {
+    const { service, http, location } = setup('');
+    let delivery = '';
+
+    service.send(request).subscribe((result) => (delivery = result));
+
+    expect(delivery).toBe('mailto');
+    expect(location.href).toMatch(/^mailto:/);
+    http.verify();
   });
 });

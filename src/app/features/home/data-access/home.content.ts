@@ -29,9 +29,28 @@ export const RESULTS: Result[] = [
 ];
 
 export const CASES: CaseStudy[] = [
-  { sector: 'Industria energética', title: 'Trazabilidad de planta en tiempo real', description: 'Mensajería asíncrona para la producción de transformadores: −40% en respuesta y −50% en consolidación de datos.' },
-  { sector: 'Hotelería', title: 'Gestión digital de habitaciones', description: 'Más de 10 integraciones con reservas y facturación: −60% en tiempo de asignación.' },
-  { sector: 'Sistemas corporativos', title: 'Integración y entrega continua', description: '15+ APIs entre sistemas y despliegues de 1 día a menos de 1 hora.' },
-  { sector: 'Software empresarial', title: 'Modernización de aplicaciones', description: '8+ aplicaciones construidas y migradas a .NET Core.' },
+  {
+    sector: 'Industria energética',
+    title: 'Trazabilidad de planta en tiempo real',
+    description: 'Mensajería asíncrona para la producción de transformadores: −40% en respuesta y −50% en consolidación de datos.',
+    skills: [{ name: '.NET', icon: 'dotnetcore' }, { name: 'RabbitMQ', icon: 'rabbitmq' }, { name: 'Azure Service Bus', icon: 'azure' }, { name: 'Mensajería asíncrona' }, { name: 'Tiempo real' }],
+  },
+  {
+    sector: 'Hotelería',
+    title: 'Gestión digital de habitaciones',
+    description: 'Más de 10 integraciones con reservas y facturación: −60% en tiempo de asignación.',
+    skills: [{ name: '.NET', icon: 'dotnetcore' }, { name: 'APIs REST' }, { name: 'SQL Server', icon: 'microsoftsqlserver' }, { name: 'Integración de sistemas' }, { name: 'Automatización de procesos' }],
+  },
+  {
+    sector: 'Sistemas corporativos',
+    title: 'Integración y entrega continua',
+    description: '15+ APIs entre sistemas y despliegues de 1 día a menos de 1 hora.',
+    skills: [{ name: 'Azure DevOps', icon: 'azuredevops' }, { name: 'Docker', icon: 'docker' }, { name: 'CI/CD' }, { name: 'APIs REST' }, { name: 'SOAP' }],
+  },
+  {
+    sector: 'Software empresarial',
+    title: 'Modernización de aplicaciones',
+    description: '8+ aplicaciones construidas y migradas a .NET Core.',
+    skills: [{ name: '.NET Core', icon: 'dotnetcore' }, { name: 'Angular', icon: 'angular' }, { name: 'Azure', icon: 'azure' }, { name: 'Migración a .NET' }, { name: 'Clean Architecture' }],
+  },
 ];
-
