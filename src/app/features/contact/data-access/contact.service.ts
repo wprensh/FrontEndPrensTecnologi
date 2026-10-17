@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, map, of } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 
 import { API_URL } from '../../../core/http/api-url';
 import { HANDLES_OWN_ERRORS } from '../../../core/http/error.interceptor';
@@ -55,6 +55,10 @@ export function sendErrorMessage(error: unknown): string {
   return `No pudimos enviar su mensaje. Intente de nuevo o escríbanos a ${CONTACT.email}.`;
 }
 
+function isUnavailable(error: unknown): boolean {
+  return error instanceof HttpErrorResponse && (error.status === 0 || error.status >= 500);
+}
+
 @Injectable({ providedIn: 'root' })
 export class ContactService {
   private readonly http = inject(HttpClient);
@@ -63,13 +67,19 @@ export class ContactService {
 
   /** Envía el mensaje por el API; sin API configurado, abre el cliente de correo del visitante con el mensaje listo. */
   send(request: ContactRequest): Observable<ContactDelivery> {
-    if (!this.apiUrl) {
-      this.document.location.href = buildMailto(request);
-      return of('mailto');
-    }
+    if (!this.apiUrl) return this.openMailto(request);
 
     return this.http
       .post(`${this.apiUrl}/api/contacto`, toApiRequest(request), { context: new HttpContext().set(HANDLES_OWN_ERRORS, true) })
-      .pipe(map(() => 'api' as const));
+      .pipe(
+        map(() => 'api' as const),
+        // API caído, sin red o sin correo configurado (503): el mensaje no se pierde, se abre el correo del visitante.
+        catchError((error: unknown) => (isUnavailable(error) ? this.openMailto(request) : throwError(() => error))),
+      );
+  }
+
+  private openMailto(request: ContactRequest): Observable<ContactDelivery> {
+    this.document.location.href = buildMailto(request);
+    return of('mailto');
   }
 }

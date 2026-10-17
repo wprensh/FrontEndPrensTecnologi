@@ -1,5 +1,5 @@
-// Producción (GitHub Pages). Con apiUrl vacío el formulario de contacto abre el correo del visitante;
-// cuando el backend esté publicado, ponga aquí su URL (por ejemplo https://api.prenstecnologi.com).
+// Producción (GitHub Pages): backend .NET publicado en Render (servicio prens-tecnologi-api).
+// Con apiUrl vacío, o si el API no responde, el formulario de contacto abre el correo del visitante.
 export const environment = {
-  apiUrl: '',
+  apiUrl: 'https://prens-tecnologi-api.onrender.com',
 };

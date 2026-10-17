@@ -76,6 +76,27 @@ describe('ContactService', () => {
     http.verify();
   });
 
+  it('abre el correo del visitante si el API no está disponible', () => {
+    const { service, http, location } = setup('http://api.test');
+    let delivery = '';
+
+    service.send(request).subscribe((result) => (delivery = result));
+    http.expectOne('http://api.test/api/contacto').flush({}, { status: 503, statusText: 'Service Unavailable' });
+
+    expect(delivery).toBe('mailto');
+    expect(location.href).toMatch(/^mailto:/);
+  });
+
+  it('deja el error 429 al formulario', () => {
+    const { service, http } = setup('http://api.test');
+    let status = 0;
+
+    service.send(request).subscribe({ error: (error) => (status = error.status) });
+    http.expectOne('http://api.test/api/contacto').flush({}, { status: 429, statusText: 'Too Many Requests' });
+
+    expect(status).toBe(429);
+  });
+
   it('abre el correo del visitante cuando no hay API', () => {
     const { service, http, location } = setup('');
     let delivery = '';
