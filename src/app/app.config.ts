@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -12,8 +12,13 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
 
-    // Rutas: parámetros de ruta como input() y transiciones nativas entre vistas
-    provideRouter(routes, withComponentInputBinding(), withViewTransitions()),
+    // Rutas: parámetros de ruta como input(), transiciones nativas y scroll al inicio en cada página nueva
+    provideRouter(
+      routes,
+      withComponentInputBinding(),
+      withViewTransitions(),
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' }),
+    ),
 
     // HttpClient con fetch e interceptores funcionales
     provideHttpClient(withFetch(), withInterceptors([errorInterceptor])),

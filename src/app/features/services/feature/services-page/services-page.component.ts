@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 import { SERVICE_CATALOG } from '../../data-access/services.content';
 
 // Opción 3, Selector: se elige un servicio arriba y abajo aparecen sus tecnologías en tarjetas
 @Component({
   selector: 'app-services-page',
-  imports: [MatButtonModule, MatIconModule],
+  imports: [RouterLink, MatButtonModule, MatIconModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="page">
@@ -39,6 +40,7 @@ import { SERVICE_CATALOG } from '../../data-access/services.content';
         <div class="panel-head">
           <h2>{{ service.title }}</h2>
           <p>{{ service.summary }}</p>
+          <a class="detail-link" [routerLink]="['/servicios', service.id]">Ver la página de {{ service.title }} <span aria-hidden="true">→</span></a>
         </div>
         <ul class="cards">
           @for (tech of service.technologies; track tech.name) {
@@ -53,7 +55,7 @@ import { SERVICE_CATALOG } from '../../data-access/services.content';
 
       <footer class="cta-band">
         <p>¿No encuentra lo que busca? Cuéntenos su caso y le proponemos la solución.</p>
-        <a mat-flat-button class="cta" href="mailto:wprensh@hotmail.com">Hablemos de su proyecto</a>
+        <a mat-flat-button class="cta" routerLink="/contacto">Hablemos de su proyecto</a>
       </footer>
     </div>
   `,
@@ -84,6 +86,8 @@ import { SERVICE_CATALOG } from '../../data-access/services.content';
     .panel { padding: 40px 0 48px; }
     .panel-head h2 { margin: 0; font-size: 28px; font-weight: 600; letter-spacing: -0.01em; color: var(--brand-navy); }
     .panel-head p { max-width: 640px; margin: 8px 0 0; font-size: 16px; line-height: 1.55; color: var(--brand-ink); }
+    .detail-link { display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; color: var(--brand-ochre); text-decoration: none; }
+    .detail-link:hover { text-decoration: underline; }
 
     .cards {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;

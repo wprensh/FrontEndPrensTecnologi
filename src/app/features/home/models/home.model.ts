@@ -1,4 +1,5 @@
 export interface Service {
+  id: string; // página del servicio: /servicios/<id>
   icon: string; // nombre de Material Icon
   title: string;
   description: string;

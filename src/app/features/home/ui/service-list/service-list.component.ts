@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 import { Service } from '../../models/home.model';
 import { logoLabel } from './logo-label';
@@ -6,6 +8,7 @@ import { logoLabel } from './logo-label';
 // Opción 5, Rejilla con logos: celdas con bordes finos, logos agrupados arriba y línea amarilla al pasar el ratón
 @Component({
   selector: 'app-service-list',
+  imports: [RouterLink, MatButtonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ul class="grid">
@@ -18,11 +21,16 @@ import { logoLabel } from './logo-label';
           </div>
           <h3>{{ service.title }}</h3>
           <p>{{ service.description }}</p>
+          <a mat-stroked-button class="more" [routerLink]="['/servicios', service.id]" [attr.aria-label]="'Ver más sobre ' + service.title">
+            Ver más <span aria-hidden="true">→</span>
+          </a>
         </li>
       }
     </ul>
   `,
   styles: `
+    @use '@angular/material' as mat;
+
     :host { display: block; }
     .grid {
       display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -30,7 +38,7 @@ import { logoLabel } from './logo-label';
       border-top: 1px solid var(--brand-line); border-left: 1px solid var(--brand-line);
     }
     .cell {
-      position: relative; padding: 28px 24px 32px;
+      position: relative; display: flex; flex-direction: column; padding: 28px 24px 28px;
       border-right: 1px solid var(--brand-line); border-bottom: 1px solid var(--brand-line);
       transition: background 150ms ease;
     }
@@ -47,7 +55,12 @@ import { logoLabel } from './logo-label';
     }
     .logo img { object-fit: contain; }
     h3 { margin: 24px 0 8px; font-size: 16px; font-weight: 600; color: var(--brand-navy); }
-    p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--brand-muted); }
+    p { margin: 0 0 20px; font-size: 13.5px; line-height: 1.55; color: var(--brand-muted); }
+    .more {
+      align-self: flex-start; margin-top: auto; height: 36px; padding: 0 14px; font-size: 13px; font-weight: 600;
+      @include mat.button-overrides((outlined-label-text-color: var(--brand-navy), outlined-outline-color: var(--brand-navy), outlined-container-shape: 2px));
+    }
+    .more:hover { background: var(--brand-navy); color: #fff; }
     @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 600px) {
       .grid { grid-template-columns: 1fr; }

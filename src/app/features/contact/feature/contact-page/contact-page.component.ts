@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, input, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -148,6 +148,18 @@ export class ContactPageComponent {
   protected readonly sending = signal(false);
   protected readonly sendError = signal<string | null>(null);
   protected readonly delivery = signal<ContactDelivery | null>(null);
+
+  /** ?interes=... desde la página de un servicio: preselecciona ese servicio en el formulario. */
+  readonly interes = input<string>();
+
+  constructor() {
+    effect(() => {
+      const interest = this.interes();
+      if (interest && (CONTACT_INTERESTS as readonly string[]).includes(interest)) {
+        untracked(() => this.form.controls.interest.setValue(interest));
+      }
+    });
+  }
 
   protected error(field: keyof typeof this.form.controls): string {
     return fieldError(this.form, field);
